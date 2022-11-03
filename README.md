@@ -16,4 +16,4 @@ To get the list of pods created:
 To get the list of services created:
 > kubectl get svc -n microservices
 
-The application can be accessed via the NodePort service at port `30007` i.e. `node_ip_address:30007`
+The application frontend can be accessed via the NodePort service at port `30007` i.e. `node_ip_address:30007`
