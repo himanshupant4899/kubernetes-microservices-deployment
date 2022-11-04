@@ -12,6 +12,7 @@ spec:
       labels:
         app: emailservice
     spec:
+      replicas: 2
       containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/emailservice:v0.4.1
@@ -32,6 +33,13 @@ spec:
           periodSeconds: 5
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:8080"]
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
 
 
 
@@ -63,6 +71,7 @@ spec:
       labels:
         app: recommendationservice
     spec:
+      replicas: 2
       containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.4.1
@@ -117,6 +126,7 @@ spec:
       labels:
         app: productcatalogservice
     spec:
+      replicas: 2
       containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.4.1
@@ -164,6 +174,7 @@ spec:
       labels:
         app: paymentservice
     spec:
+      replicas: 2
       containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/paymentservice:v0.4.1
@@ -210,6 +221,7 @@ spec:
       labels:
         app: currencyservice
     spec:
+      replicas: 2
       containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/currencyservice:v0.4.1
@@ -302,6 +314,7 @@ spec:
       labels:
         app: adservice
     spec:
+      replicas: 2
       containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/adservice:v0.4.1
@@ -318,6 +331,13 @@ spec:
           periodSeconds: 5
           exec:
             command: [ "/bin/grpc_health_probe", "-addr=:9555" ]
+        resources:
+          requests:
+            cpu: 200m
+            memory: 180Mi
+          limits:
+            cpu: 300m
+            memory: 300Mi
 
 
 ---
@@ -348,6 +368,7 @@ spec:
       labels:
         app: cartservice
     spec:
+      replicas: 2
       containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/cartservice:v0.4.1
@@ -396,6 +417,7 @@ spec:
       labels:
         app: redis-cart
     spec:
+      replicas: 2
       containers:
       - name: redis
         image: redis:alpine
@@ -414,6 +436,13 @@ spec:
           periodSeconds: 5
           tcpSocket:
             port: 6379
+        resources:
+          requests:
+            cpu: 70m
+            memory: 200Mi
+          limits:
+            cpu: 128m
+            memory: 300Mi
       volumes:
       - name: redis-data
         emptyDir: {}
@@ -448,6 +477,7 @@ spec:
       labels:
         app: checkoutservice
     spec:
+      replicas: 2
       containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.4.1
@@ -506,6 +536,7 @@ spec:
       labels:
         app: frontend
     spec:
+      replicas: 2
       containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/frontend:v0.4.1
@@ -544,14 +575,14 @@ kind: Service
 metadata:
   name: frontend
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: frontend
   ports:
   - protocol: TCP
     port: 80
     targetPort: 8080
-    nodePort: 30007
+
 
 
 
