@@ -17,4 +17,5 @@ The project depicts the deployment of a sample microservices application using h
 ### To install the components created execute the following command: ```helm install -f file_to_ovveride_default_values release_name```
 > helm install -f values/email-service-values.yaml emailservice
 
-## OR alternatively using a helmfile.
+## OR alternatively using a helmfile using the following command:
+> helmfile sync
