@@ -14,5 +14,7 @@ The project depicts the deployment of a sample microservices application using h
 ### For dry run:
 > helm install --dry-run -f values/email-service-value.yaml charts/microservice
 
-### To install the components created: ```helm install -f file_to_ovveride_default_values release_name```
+### To install the components created execute the following command: ```helm install -f file_to_ovveride_default_values release_name```
 > helm install -f values/email-service-values.yaml emailservice
+
+## OR alternatively using a helmfile.
